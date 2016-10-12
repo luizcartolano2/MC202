@@ -1,0 +1,23 @@
+void arv_size(arv *Arv){
+  int arv_count;
+
+  //primeiro verificamos se a arvore é vazia
+  if(Arv == NULL)
+    return;
+
+  //criamos uma fila vazia
+  Fila *fila;
+
+  fila->data[fila->size] = Arv->data;
+  fila->size = fila->size + 1;
+
+  while (1){
+    arv_count = fila->size;
+    if(arv_count == 0)
+      break;
+    while (arv_count > 0){
+      arv *aux =
+    }
+  }
+
+}
