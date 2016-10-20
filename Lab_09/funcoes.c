@@ -69,9 +69,13 @@ arv* arv_build(arv *Arv, char s){
 double calc_peso(arv *Arv){
   double e,d;
 
-  //se a arvore for nula, as arestas n possuem peso, assim retornamos 0
+  //se a arvore for nula, as arestas nao possuem peso, assim retornamos 0
   if(Arv == NULL)
     return 0;
+    else if(Arv->left == NULL)
+      return Arv->p_right + calc_peso(Arv->right);
+      else if(Arv->right == NULL)
+        return Arv->p_left + calc_peso(Arv->left);
 
   //aqui chamamos a funcao para cada um dos lados a fim de descobrir a soma dos pesos em cada um dos lados
   e = Arv->p_left + calc_peso(Arv->left);
