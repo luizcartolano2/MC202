@@ -15,7 +15,7 @@ arv* arv_lib(arv *Arv){
 }
 
 arv* create(){
-  //funcao responsavel por criar um novo nó
+  //funcao responsavel por criar um novo nó e inicializar os valores da struct
   arv* new = malloc(sizeof(struct arv));
   new->right = NULL;
   new->left = NULL;
@@ -62,6 +62,7 @@ arv* arv_build(char s){
   //aqui chamamos a funcao recursiva para o lado direito da arvore
   Arv->right = arv_build(n_c);
 
+  //lendo o ultimo parenteses para darmos fim a funcao
   scanf("%c",&n_c);
 
   return Arv;
@@ -75,17 +76,20 @@ double calc_peso(arv *Arv){
   if(Arv == NULL)
     return 0;
 
-    else if(Arv->left == NULL)
-      return Arv->p_right + calc_peso(Arv->right);
+  //se a arvore nao possui filho esquerdo, é um sinal de que o direito existe e por isso calculamos o valor do lado direito
+  else if(Arv->left == NULL)
+    return Arv->p_right + calc_peso(Arv->right);
 
-      else if(Arv->right == NULL)
-        return Arv->p_left + calc_peso(Arv->left);
+  //se a arvore nao possui filho direito, é um sinal de que o esquerdo existe e por isso calculamos o valor do lado esquerdo
+  else if(Arv->right == NULL)
+    return Arv->p_left + calc_peso(Arv->left);
 
-          else{
-            //aqui chamamos a funcao para cada um dos lados a fim de descobrir a soma dos pesos em cada um dos lados
-            left = Arv->p_left + calc_peso(Arv->left);
-            right = Arv->p_right + calc_peso(Arv->right);
-            //aqui usamos o recurso de comparacao ternaria do c para retornamos o valor
-            return (left >= right) ? left : right;
-          }
+  else{
+    //aqui chamamos a funcao para cada um dos lados a fim de descobrir a soma dos pesos em cada um dos lados
+    left = Arv->p_left + calc_peso(Arv->left);
+    right = Arv->p_right + calc_peso(Arv->right);
+
+    //aqui usamos o recurso de comparacao ternaria do c para retornamos o valor
+    return (left >= right) ? left : right;
+  }
 }
