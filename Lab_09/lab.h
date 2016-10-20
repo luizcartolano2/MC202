@@ -19,7 +19,7 @@ typedef struct arv{
   double p_right, p_left;
 }arv;
 
-arv* arv_build(arv *Arv,char s);
+arv* arv_build(char s);
 arv* arv_lib(arv *Arv);
 double calc_peso(arv *Arv);
 

@@ -9,7 +9,7 @@ int main(void){
 
   while (scanf("%c",&s) != EOF){
     //chama a funcao que constroi a arvore
-    Arv = arv_build(Arv,s);
+    Arv = arv_build(s);
 
     if(Arv != NULL){
       //chama a funcao que calcula o peso das arestas

@@ -25,7 +25,7 @@ arv* create(){
   return new;
 }
 
-arv* arv_build(arv *Arv, char s){
+arv* arv_build(char s){
   double peso;
   int no_value;
   char n_c;
@@ -36,10 +36,10 @@ arv* arv_build(arv *Arv, char s){
     return NULL;
 
   //criando o no da arvore
-  Arv = create();
+  arv *Arv = create();
 
   //chamamos a funcao recursivamente para o filho esquerdo (visto que a arvore esta dada em-ordem)
-  Arv->left = arv_build(Arv->left,n_c);
+  Arv->left = arv_build(n_c);
   if(Arv->left != NULL){
       //leitura do peso da aresta
       scanf("%lf:",&peso);
@@ -60,7 +60,7 @@ arv* arv_build(arv *Arv, char s){
   }
 
   //aqui chamamos a funcao recursiva para o lado direito da arvore
-  Arv->right = arv_build(Arv->right,n_c);
+  Arv->right = arv_build(n_c);
 
   scanf("%c",&n_c);
 
