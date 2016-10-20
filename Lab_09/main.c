@@ -8,18 +8,17 @@ int main(void){
   char s;
 
   while (scanf("%c",&s) != EOF){
-    //scanf("%c",&s);
     //chama a funcao que constroi a arvore
     Arv = arv_build(Arv,s);
 
-    //chama a funcao que calcula o peso das arestas
-    weight = calc_peso(Arv);
+    if(Arv != NULL){
+      //chama a funcao que calcula o peso das arestas
+      weight = calc_peso(Arv);
+      printf("%.3lf\n",weight);
+    }
 
     //chama a funcao que libera a arvore
     Arv = arv_lib(Arv);
-
-    //printa a saida
-    printf("%.3lf\n",weight);
 
     scanf("%c",&s);
 
