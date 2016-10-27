@@ -71,5 +71,4 @@ void hash_remove(table* Table,long long int key){
     Table[index].key = -1;
     Table[index].value = 0;
   }
-
 }
