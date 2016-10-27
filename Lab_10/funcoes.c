@@ -67,7 +67,9 @@ void hash_remove(table* Table,long long int key){
 
   int index = hash_search(Table,key);
 
-  Table[index].key = -1;
-  Table[index].value = 0;
+  if(index >= 0){
+    Table[index].key = -1;
+    Table[index].value = 0;
+  }
 
 }
