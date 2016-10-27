@@ -3,17 +3,20 @@
 void init_table(table* Table){
   int i;
   //if the value in the key is -1, it means the position is free an can be use
+  //so we initiate all the positions with a '-1'
   for(i = 0; i < M; i++){
     Table[i].key = -1;
   }
 }
 
 int hash_index(long long int key){
+  //function that calculate the index based in the mod of key divide by M(who is a "cousin number")
   return key % M;
 }
 
 int hash_index2(long long int key){
-  return 1+(key%(M-1));
+  //function that calculate a second index based in one plus the mod of key divide by (M-2)(who is also a "cousin number")
+  return 1+(key%(M-2));
 }
 
 int hash_insert(table* Table,long long int key, int value){
