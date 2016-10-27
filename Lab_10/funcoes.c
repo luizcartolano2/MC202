@@ -5,7 +5,6 @@ void init_table(table* Table){
   //if the value in the key is -1, it means the position is free an can be use
   for(i = 0; i < M; i++){
     Table[i].key = -1;
-    //Table[i].value = 0;
   }
 }
 
