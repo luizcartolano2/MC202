@@ -20,20 +20,24 @@ int hash_index2(long long int key){
 }
 
 int hash_insert(table* Table,long long int key, int value){
+  //first we calculate the index where they should be insert
   int i = hash_index(key);
   int k = hash_index2(key);
   int count = 0;
 
+  //if in the index we already had the same key we are trying to insert, we just have to atualize the values
   if(Table[i].key == key){
     Table[i].value = value;
     return 1;
   }
-
+  //here we make a loop to find a free position where we should insert the key
   while (Table[i].key != (long long int)-1) {
+    //here we verify again if the key already exist
     if(Table[i].key == key){
       Table[i].value = value;
       return 1;
     }
+    //here we have a counter to check if our positions are smaller than the size of the hash
     count++;
     if(count == 50000)
       return -2;
