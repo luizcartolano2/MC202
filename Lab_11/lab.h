@@ -1,3 +1,11 @@
+//
+//
+//    Created by Luiz Cartolano
+//    RA: 183012
+//    Program to implement a minimun heap in C
+//
+//
+
 #ifndef lab_11
 #define  lab_11
 
