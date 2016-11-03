@@ -7,3 +7,9 @@
 //
 
 #include "lab.h"
+
+<???> h_insert(){}
+
+<???> h_hremove(){}
+
+<???> h_reduce(){}

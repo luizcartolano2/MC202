@@ -12,4 +12,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+//functions that will operate the heap
+<???> h_insert();
+<???> h_hremove();
+<???> h_reduce();
+
 #endif
