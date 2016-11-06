@@ -12,12 +12,19 @@ int main(int argc, char const *argv[]){
 
   char command;
   int key, cost;
+  heap *Heap = NULL;
+  tamanho_heap = 0;
 
   do{
     scanf("%c",&command);
     switch (command){
       case 'i':
+        if(!Heap)
+            Heap = create_heap();
+
         scanf("%d %d",&key,&cost);
+        h_insert(Heap,key,cost,&tamanho_heap);
+
         break;
       case 'm':
         break;

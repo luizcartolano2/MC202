@@ -9,12 +9,21 @@
 #ifndef lab_11
 #define  lab_11
 
+int tamanho_heap;
+
 #include <stdio.h>
 #include <stdlib.h>
 
+typedef struct heap{
+	int chave;
+	int custo;
+}heap;
+
+
 //functions that will operate the heap
-<???> h_insert();
-<???> h_hremove();
-<???> h_reduce();
+void h_insert(heap vetor_heap[], int chave, int custo, int *point_tamanho);
+void h_hremove();
+void h_reduce();
+heap* create_heap();
 
 #endif
