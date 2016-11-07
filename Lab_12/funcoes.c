@@ -49,16 +49,12 @@ void m_insert(node* new){
 
 node* verify_node(int line, int collum){
 
-  node* aux = first_e;
+  node* aux/* = first_e*/;
 
-  while (aux){
-    if(((aux->line) == line) && (aux->collum == collum)){
-      // printf("pruuuuuuuuuu\n");
-      // printf("%d %d\n",line,collum);
+  for(aux = first_e; aux != NULL; aux = aux->prox)
+    if(((aux->line) == line) && (aux->collum == collum))
       return aux;
-    }
-    aux = aux->prox;
-  }
+
 
   return NULL;
 
