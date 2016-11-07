@@ -13,11 +13,17 @@ typedef struct node{
   int line;
   int collum;
   int value;
-  struct node* n_line;
-  struct node* n_collum;
+  struct node* prox;
 }node;
 
+node* first_e;
+
+#include <stdio.h>
+#include <stdlib.h>
+
+void print_list(node *list);
 node* new_node(int line, int collum, int value);
 void m_insert(node* new_node);
+node* verify_node(int line, int collum);
 
 #endif /*lab*/
