@@ -21,13 +21,10 @@ int main(int argc, char const *argv[]) {
   for(i = 0; i < k; i++){
     scanf("%d %d %d",&line,&collum,&value);
     vet[i] = new_node(line,collum,value);
-    //printf("%d %d %d\n",(vet[i])->line,(vet[i])->collum,(vet[i])->value);
   }
 
   for(i = 0; i < k; i++)
     m_insert(vet[i]);
-
-  //print_list(first_e);
 
   while (1){
     scanf("%d %d",&line,&collum);
@@ -39,7 +36,6 @@ int main(int argc, char const *argv[]) {
       printf("(%d,%d) = 0\n",line,collum);
     else
       printf("(%d,%d) = %d\n",line,collum,aux->value);
-      //printf("oi\n");
   }
 
 

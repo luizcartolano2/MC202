@@ -13,7 +13,8 @@ typedef struct node{
   int line;
   int collum;
   int value;
-  struct node* prox;
+  struct node* lines;
+  struct node* collums;
 }node;
 
 node* first_e;
