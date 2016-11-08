@@ -23,9 +23,9 @@ int main(int argc, char const *argv[]) {
       line_m = entradas[i].line;
   }
 
-  A = malloc(k * sizeof(int));
-  R = malloc((line_m+1) * sizeof(int));
-  C = malloc(k * sizeof(int));
+  A = malloc(k * sizeof(int)); /*armazena as celulas nonzero por linhas*/
+  R = malloc((line_m+1) * sizeof(int)); /*armazena a posicao em 'A' do primeiro elemento em cada linha da Matriz*/
+  C = malloc(k * sizeof(int)); /*Armazena a coluna de cada elemento de 'A'*/
   if((!A) || (!R) || (!C))
     printf("memória insuficiente\n");
 
