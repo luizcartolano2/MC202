@@ -8,8 +8,9 @@ typedef struct data{
 }data;
 
 int main(int argc, char const *argv[]) {
-  int k, i, line_m = 0;
-  int *A, *R, *C;
+  int k, n_line = 0, n_collum = 0; /*nonzero entrys, number of lines, number of collums*/
+  int i;
+  int *row_ptr, *vals, *col_ind;
   data *entradas;
 
   scanf("%d",&k);
@@ -19,15 +20,23 @@ int main(int argc, char const *argv[]) {
 
   for(i = 0; i < k; i++){
     scanf("%d %d %d",&(entradas[i]).line,&(entradas[i]).collum,&(entradas[i]).value);
-    if(line_m < entradas[i].line)
-      line_m = entradas[i].line;
+    if(n_line < entradas[i].line)
+      n_line = entradas[i].line;
+    if(n_collum < entradas[i].collum)
+      n_collum = entradas[i].collum;
   }
 
-  A = malloc(k * sizeof(int)); /*armazena as celulas nonzero por linhas*/
-  R = malloc((line_m+1) * sizeof(int)); /*armazena a posicao em 'A' do primeiro elemento em cada linha da Matriz*/
-  C = malloc(k * sizeof(int)); /*Armazena a coluna de cada elemento de 'A'*/
-  if((!A) || (!R) || (!C))
+  row_ptr = malloc(k * sizeof(int));
+  vals = malloc((n_line+1) * sizeof(int));
+  col_ind = malloc(k * sizeof(int)); 
+  if((!row_ptr) || (!vals) || (!col_ind))
     printf("memória insuficiente\n");
+
+  for(i = 0; i < k;i++){
+    row_ptr[i] = (entradas[i]).value;
+    col_ind[i] = (entradas[i]).collum;
+
+  }
 
   return 0;
 
