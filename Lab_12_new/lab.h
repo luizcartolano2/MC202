@@ -25,11 +25,17 @@ typedef struct CSR{
 	int cols;
 }csr;
 
-
+//global the declaration of the list head
 node * Head;
 
+//functions to mannage the list
 void insert_node(int row, int col, int value);
 void printa_tudo(node *List);
 node *create_node(int row, int col, int value);
+
+//functions to mannage the CSR
+void make_csr(node *list, csr *Crs);
+csr *create_csr(csr *Csr, int size, int rows);
+int find_csr(csr *Csr, int row, int col);
 
 #endif

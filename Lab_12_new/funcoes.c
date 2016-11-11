@@ -3,7 +3,7 @@
 node *create_node(int row, int col, int value){
   node *new_node = calloc(1,sizeof(node));
   if(!new_node)
-    printf("memória insuficiente para alocar um novo nó\n");
+    printf("Error in the allocation of a new_node\n");
 
   new_node->row = row;
   new_node->col = col;
@@ -18,32 +18,25 @@ void insert_node(int row, int col, int value){
 
   node * cel = create_node(row,col,value);
   if(!cel)
-    printf("erro ao receber o retorno de insert_node\n");
+    printf("Error to receive the node\n");
 
   if (!Head) {
     Head = cel;
-    printf("!Head\n");
   } else if (cel->row <= Head->row) {
     cel->next = Head;
     Head = cel;
-    printf("cel->row <= Head->row\n");
   } else {
     node *prev = Head;
     node *ant = NULL;
-    printf("else\n");
     while((cel->row > prev->row)){
-      printf("ant = prev:\n");
       ant = prev;
-      printf("prev = prev->next\n");
       prev = prev->next;
     }
     if (!prev) {
       ant->next = cel;
-      printf("!prev\n");
     } else {
       ant->next = cel;
       cel->next = prev;
-      printf("else2\n");
     }
   }
 }
@@ -54,3 +47,47 @@ void printa_tudo(node *List) {
     List = List->next;
   }
 }
+
+void make_csr(node *list, csr *Crs){
+  node *aux = Head;
+  int i = 0, k;
+
+  while (aux) {
+    Crs->val[i] = aux->val;
+    Crs->col_ind[i] = aux->col;
+    if (Crs->row_ptr[aux->row] == -1)
+      Crs->row_ptr[aux->row] = i;
+    aux = aux->next;
+    i++;
+  }
+  Crs->row_ptr[0] = 0;
+  Crs->row_ptr[Crs->row_ptr_length-1] = Crs->val_length;
+
+  for(k = Crs->row_ptr_length - 1; k > 0; k--)
+    if (Crs->row_ptr[k] == -1)
+      Crs->row_ptr[k] = Crs->row_ptr[k+1];
+
+  Crs->rows = aux->row;
+  Crs->cols = aux->col;
+
+}
+
+csr *create_csr(csr *Csr, int size, int rows){
+  int i;
+
+  Csr->val = calloc(size,sizeof(int));
+  Csr->col_ind = calloc(size,sizeof(int));
+  Csr->row_ptr = calloc(rows+1,sizeof(int));
+  if((!Csr->val) || (!Csr->col_ind) || (!Csr->row_ptr))
+    printf("Error in the CSR allocation\n");
+
+  Csr->val_length = size;
+  Csr->row_ptr_length = rows + 1;
+
+  for(i = 0; i < Csr->row_ptr_length; i++)
+    Csr->row_ptr[i] = -1;
+
+  return Csr;
+}
+
+int find_csr(csr *Csr, int row, int col){}
