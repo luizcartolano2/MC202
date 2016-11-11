@@ -1,7 +1,7 @@
 #include "lab.h"
 
 int main(int argc, char const *argv[]) {
-  int k, i, max_row = 0;
+  int k, i, max_row = 0,row,col,val;
   Head = NULL;
   data *entradas;
   csr *CSR;
@@ -22,7 +22,19 @@ int main(int argc, char const *argv[]) {
 
   CSR = create_csr(CSR,k,max_row);
 
-  printa_tudo(Head);
+  while (1) {
+    scanf("%d %d",&row,&col);
+    if((row == -1) && (col == -1))
+      break;
+    val = find_csr(CSR,row,col);
+    printf("(%d,%d) = %d\n",row,col,val);
+  }
+
+  destruct_list(&Head);
+  CSR = free_CSR(CSR);
+
+  // free(Head);
+  free(CSR);
 
   return 0;
 

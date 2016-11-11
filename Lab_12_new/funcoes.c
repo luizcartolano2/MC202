@@ -48,6 +48,18 @@ void printa_tudo(node *List) {
   }
 }
 
+void destruct_list(node** L){
+  //here while the head exist whe free the aux apointer
+
+  while(*L){
+    node* aux = (*L);
+    (*L) = aux->next;
+    free(aux);
+  }
+  free(*L);
+  (*L) = NULL;
+}
+
 void make_csr(node *list, csr *Crs){
   node *aux = Head;
   int i = 0, k;
@@ -90,4 +102,22 @@ csr *create_csr(csr *Csr, int size, int rows){
   return Csr;
 }
 
-int find_csr(csr *Csr, int row, int col){}
+int find_csr(csr *Csr, int row, int col){
+  int i;
+
+  for(i = Csr->row_ptr[row];i < Csr->row_ptr[row+1]; i++)
+    if(Csr->col_ind[i] == col)
+      return Csr->val[i];
+
+  return 0;
+
+}
+
+csr *free_CSR(csr *CSR){
+  free(CSR->val);
+  free(CSR->col_ind);
+  free(CSR->row_ptr);
+
+  return CSR;
+  
+}

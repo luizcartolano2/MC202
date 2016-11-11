@@ -32,10 +32,12 @@ node * Head;
 void insert_node(int row, int col, int value);
 void printa_tudo(node *List);
 node *create_node(int row, int col, int value);
+void destruct_list(node** L);
 
 //functions to mannage the CSR
 void make_csr(node *list, csr *Crs);
 csr *create_csr(csr *Csr, int size, int rows);
 int find_csr(csr *Csr, int row, int col);
+csr *free_CSR(csr *CSR);
 
 #endif
