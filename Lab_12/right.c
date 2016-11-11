@@ -7,11 +7,22 @@ typedef struct data{
   int value;
 }data;
 
+typedef struct {
+  int *val;
+	int *col_ind;
+	int *row_ptr;
+	int val_length;
+	int row_ptr_length;
+	int rows;
+	int cols;
+}csr;
+
 int main(int argc, char const *argv[]) {
-  int k, n_line = 0, n_collum = 0; /*nonzero entrys, number of lines, number of collums*/
   int i;
-  int *row_ptr, *vals, *col_ind;
   data *entradas;
+  csr *CRS;
+
+  CRS = malloc
 
   scanf("%d",&k);
   entradas = malloc(k * sizeof(data));
@@ -24,18 +35,6 @@ int main(int argc, char const *argv[]) {
       n_line = entradas[i].line;
     if(n_collum < entradas[i].collum)
       n_collum = entradas[i].collum;
-  }
-
-  row_ptr = malloc(k * sizeof(int));
-  vals = malloc((n_line+1) * sizeof(int));
-  col_ind = malloc(k * sizeof(int)); 
-  if((!row_ptr) || (!vals) || (!col_ind))
-    printf("memória insuficiente\n");
-
-  for(i = 0; i < k;i++){
-    row_ptr[i] = (entradas[i]).value;
-    col_ind[i] = (entradas[i]).collum;
-
   }
 
   return 0;
