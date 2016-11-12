@@ -103,7 +103,7 @@ void make_csr(node *list, csr **Crs){
 int find_csr(csr *Csr, int row, int col){
   int i;
 
-  for(i = Csr->row_ptr[row];i < Csr->row_ptr[row+1]; i++)
+  for(i = Csr->row_ptr[row];i < Csr->row_ptr[row]; i++)
     if(Csr->col_ind[i] == col)
       return Csr->val[i];
 
@@ -122,7 +122,7 @@ csr *free_CSR(csr *CSR){
 
 void print_CSR(csr *CSR){
   int i;
-  for(i = 0; i < CSR->row_ptr_length;i++)
+  for(i = 0; i < CSR->row_ptr_length+1;i++)
     printf("row_ptr[%d]=%d\n",i,CSR->row_ptr[i]);
 
   for(i = 0; i < CSR->cols; i++)

@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct Node {
+typedef struct node {
 	int row, col, val;
 	struct node *next;
 }node;
@@ -39,5 +39,6 @@ void make_csr(node *list, csr **Crs);
 csr *create_csr(csr *Csr, int size, int rows);
 int find_csr(csr *Csr, int row, int col);
 csr *free_CSR(csr *CSR);
+void print_CSR(csr *CSR);
 
 #endif

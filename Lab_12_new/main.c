@@ -29,7 +29,7 @@ int main(int argc, char const *argv[]) {
   CSR->rows = max_row;
   CSR->cols = max_col;
 
-  //print_CSR(CSR);
+  print_CSR(CSR);
 
   while (1) {
     scanf("%d %d",&row,&col);
