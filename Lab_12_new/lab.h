@@ -35,7 +35,7 @@ node *create_node(int row, int col, int value);
 void destruct_list(node** L);
 
 //functions to mannage the CSR
-void make_csr(node *list, csr *Crs);
+void make_csr(node *list, csr **Crs);
 csr *create_csr(csr *Csr, int size, int rows);
 int find_csr(csr *Csr, int row, int col);
 csr *free_CSR(csr *CSR);

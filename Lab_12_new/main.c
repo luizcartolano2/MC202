@@ -1,7 +1,7 @@
 #include "lab.h"
 
 int main(int argc, char const *argv[]) {
-  int k, i, max_row = 0,row,col,val;
+  int k, i, max_row = 0, max_col = 0,row,col,val;
   Head = NULL;
   data *entradas;
   csr *CSR;
@@ -17,10 +17,19 @@ int main(int argc, char const *argv[]) {
     insert_node(entradas[i].line,entradas[i].collum,entradas[i].value);
     if(max_row < entradas[i].line)
       max_row = entradas[i].line;
+    if(max_col < entradas[i].collum)
+      max_col = entradas[i].collum;
   }
   free(entradas);
 
+  //printa_tudo(Head);
   CSR = create_csr(CSR,k,max_row);
+  make_csr(Head,&CSR);
+
+  CSR->rows = max_row;
+  CSR->cols = max_col;
+
+  //print_CSR(CSR);
 
   while (1) {
     scanf("%d %d",&row,&col);
@@ -32,8 +41,6 @@ int main(int argc, char const *argv[]) {
 
   destruct_list(&Head);
   CSR = free_CSR(CSR);
-
-  // free(Head);
   free(CSR);
 
   return 0;

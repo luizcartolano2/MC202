@@ -60,30 +60,6 @@ void destruct_list(node** L){
   (*L) = NULL;
 }
 
-void make_csr(node *list, csr *Crs){
-  node *aux = Head;
-  int i = 0, k;
-
-  while (aux) {
-    Crs->val[i] = aux->val;
-    Crs->col_ind[i] = aux->col;
-    if (Crs->row_ptr[aux->row] == -1)
-      Crs->row_ptr[aux->row] = i;
-    aux = aux->next;
-    i++;
-  }
-  Crs->row_ptr[0] = 0;
-  Crs->row_ptr[Crs->row_ptr_length-1] = Crs->val_length;
-
-  for(k = Crs->row_ptr_length - 1; k > 0; k--)
-    if (Crs->row_ptr[k] == -1)
-      Crs->row_ptr[k] = Crs->row_ptr[k+1];
-
-  Crs->rows = aux->row;
-  Crs->cols = aux->col;
-
-}
-
 csr *create_csr(csr *Csr, int size, int rows){
   int i;
 
@@ -102,6 +78,28 @@ csr *create_csr(csr *Csr, int size, int rows){
   return Csr;
 }
 
+void make_csr(node *list, csr **Crs){
+  node *aux = Head;
+  int i = 0, k;
+
+  while (aux) {
+    (*Crs)->val[i] = aux->val;
+    (*Crs)->col_ind[i] = aux->col;
+    if ((*Crs)->row_ptr[aux->row] == -1)
+      (*Crs)->row_ptr[aux->row] = i;
+    aux = aux->next;
+    i++;
+  }
+  (*Crs)->row_ptr[0] = 0;
+  (*Crs)->row_ptr[(*Crs)->row_ptr_length-1] = (*Crs)->val_length;
+
+  for(k = (*Crs)->row_ptr_length - 1; k > 0; k--)
+    if ((*Crs)->row_ptr[k] == -1)
+      (*Crs)->row_ptr[k] = (*Crs)->row_ptr[k+1];
+
+}
+
+
 int find_csr(csr *Csr, int row, int col){
   int i;
 
@@ -119,5 +117,17 @@ csr *free_CSR(csr *CSR){
   free(CSR->row_ptr);
 
   return CSR;
-  
+
+}
+
+void print_CSR(csr *CSR){
+  int i;
+  for(i = 0; i < CSR->row_ptr_length;i++)
+    printf("row_ptr[%d]=%d\n",i,CSR->row_ptr[i]);
+
+  for(i = 0; i < CSR->cols; i++)
+    printf("col_ind[%d]=%d\n",i,CSR->col_ind[i]);
+
+  for(i = 0; i < CSR->val_length; i++)
+    printf("val[%d]=%d\n",i,CSR->val[i]);
 }
