@@ -22,21 +22,27 @@ void insert_node(int row, int col, int value){
 
   if (!Head) {
     Head = cel;
+    printf("!Head\n");
   } else if (cel->row <= Head->row) {
       cel->next = Head;
       Head = cel;
+      printf("cel->row <= Head->row\n");
   } else {
       node *prev = Head;
       node *ant = NULL;
+      printf("else\n");
       while((cel->row > prev->row)){
         ant = prev;
         prev = prev->next;
+        printf("while((cel->row > prev->row))\n");
       }
       if (!prev) {
         ant->next = cel;
+        printf("!prev\n");
       } else {
         ant->next = cel;
         cel->next = prev;
+        printf("else2\n");
       }
     }
 }
