@@ -22,27 +22,31 @@ void insert_node(int row, int col, int value){
 
   if (!Head) {
     Head = cel;
-    printf("!Head\n");
+    //printf("!Head\n");
   } else if (cel->row <= Head->row) {
       cel->next = Head;
       Head = cel;
-      printf("cel->row <= Head->row\n");
+      //printf("cel->row <= Head->row\n");
   } else {
       node *prev = Head;
       node *ant = NULL;
-      printf("else\n");
-      while((cel->row > prev->row)){
+      //printf("else\n");
+      while((prev != NULL) && (cel->row > prev->row)){
+        //printf("caralho porra\n");
         ant = prev;
         prev = prev->next;
-        printf("while((cel->row > prev->row))\n");
+        //if(!prev)
+          //printf("pruuuuuuuuuuuuuuuuuuuu\n");
+        //printf("while((cel->row > prev->row))\n");
       }
+      //printf("!prev\n");
       if (!prev) {
         ant->next = cel;
-        printf("!prev\n");
+        //printf("!prev\n");
       } else {
         ant->next = cel;
         cel->next = prev;
-        printf("else2\n");
+        //printf("else2\n");
       }
     }
 }
@@ -105,13 +109,16 @@ void make_csr(node *list, csr **Crs){
 
 }
 
-
 int find_csr(csr *Csr, int row, int col){
   int i;
 
-  for(i = Csr->row_ptr[row];i < Csr->row_ptr[row+1]; i++)
-    if(Csr->col_ind[i] == col)
-      return Csr->val[i];
+  if ((row > Csr->rows) || (col > Csr->cols)) {
+    return 0;
+  } else {
+      for(i = Csr->row_ptr[row];i < Csr->row_ptr[row+1]; i++)
+        if(Csr->col_ind[i] == col)
+          return Csr->val[i];
+  }
 
   return 0;
 

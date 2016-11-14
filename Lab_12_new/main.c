@@ -1,12 +1,12 @@
 #include "lab.h"
 
-csr *CSR;
+//csr *CSR;
 
 int main(int argc, char const *argv[]) {
   int k, i, max_row = 0, max_col = 0,row,col,val;
   Head = NULL;
   data *entradas;
-//  csr *CSR;
+  csr *CSR;
 
   scanf("%d",&k);
   entradas = calloc(k,sizeof(data));
@@ -16,9 +16,9 @@ int main(int argc, char const *argv[]) {
 
   for(i = 0; i < k; i++){
     scanf("%d %d %d",&(entradas[i]).line,&(entradas[i]).collum,&(entradas[i]).value);
-    printf("reading the entrys\n");
+  //  printf("reading the entrys\n\n entradas[i].line:%d entradas[i].collum:%d entradas[i].value:%d\n\n",(entradas[i]).line,(entradas[i]).collum,(entradas[i]).value);
     insert_node(entradas[i].line,entradas[i].collum,entradas[i].value);
-    printf("inserting node\n");
+    //printf("inserting node\n");
     if(max_row < entradas[i].line)
       max_row = entradas[i].line;
     if(max_col < entradas[i].collum)
@@ -32,7 +32,7 @@ int main(int argc, char const *argv[]) {
   CSR->cols = max_col;
   make_csr(Head,&CSR);
 
-  print_CSR(CSR);
+  //print_CSR(CSR);
 
   while (1) {
     scanf("%d %d",&row,&col);
