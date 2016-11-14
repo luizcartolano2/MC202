@@ -23,22 +23,22 @@ void insert_node(int row, int col, int value){
   if (!Head) {
     Head = cel;
   } else if (cel->row <= Head->row) {
-    cel->next = Head;
-    Head = cel;
+      cel->next = Head;
+      Head = cel;
   } else {
-    node *prev = Head;
-    node *ant = NULL;
-    while((cel->row > prev->row)){
-      ant = prev;
-      prev = prev->next;
+      node *prev = Head;
+      node *ant = NULL;
+      while((cel->row > prev->row)){
+        ant = prev;
+        prev = prev->next;
+      }
+      if (!prev) {
+        ant->next = cel;
+      } else {
+        ant->next = cel;
+        cel->next = prev;
+      }
     }
-    if (!prev) {
-      ant->next = cel;
-    } else {
-      ant->next = cel;
-      cel->next = prev;
-    }
-  }
 }
 
 void printa_tudo(node *List) {
@@ -63,9 +63,9 @@ void destruct_list(node** L){
 csr *create_csr(csr *Csr, int size, int rows){
   int i;
 
-  Csr->val = calloc(size,sizeof(int));
-  Csr->col_ind = calloc(size,sizeof(int));
-  Csr->row_ptr = calloc(rows+1,sizeof(int));
+  Csr->val = calloc(size,sizeof(int));       /*A*/
+  Csr->col_ind = calloc(size,sizeof(int));   /*C*/
+  Csr->row_ptr = calloc(rows+1,sizeof(int)); /*R*/
   if((!Csr->val) || (!Csr->col_ind) || (!Csr->row_ptr))
     printf("Error in the CSR allocation\n");
 
@@ -83,17 +83,17 @@ void make_csr(node *list, csr **Crs){
   int i = 0, k;
 
   while (aux) {
-    (*Crs)->val[i] = aux->val;
-    (*Crs)->col_ind[i] = aux->col;
+    (*Crs)->val[i] = aux->val;            /*A*/
+    (*Crs)->col_ind[i] = aux->col;        /*C*/
     if ((*Crs)->row_ptr[aux->row] == -1)
-      (*Crs)->row_ptr[aux->row] = i;
+      (*Crs)->row_ptr[aux->row] = i;      /*R*/
     aux = aux->next;
     i++;
   }
   (*Crs)->row_ptr[0] = 0;
-  (*Crs)->row_ptr[(*Crs)->row_ptr_length-1] = (*Crs)->val_length;
+  (*Crs)->row_ptr[(*Crs)->row_ptr_length] = (*Crs)->val_length;
 
-  for(k = (*Crs)->row_ptr_length - 1; k > 0; k--)
+  for(k = (*Crs)->row_ptr_length; k > 0; k--)
     if ((*Crs)->row_ptr[k] == -1)
       (*Crs)->row_ptr[k] = (*Crs)->row_ptr[k+1];
 
@@ -103,7 +103,7 @@ void make_csr(node *list, csr **Crs){
 int find_csr(csr *Csr, int row, int col){
   int i;
 
-  for(i = Csr->row_ptr[row];i < Csr->row_ptr[row]; i++)
+  for(i = Csr->row_ptr[row];i < Csr->row_ptr[row+1]; i++)
     if(Csr->col_ind[i] == col)
       return Csr->val[i];
 

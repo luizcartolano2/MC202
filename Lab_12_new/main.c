@@ -24,10 +24,9 @@ int main(int argc, char const *argv[]) {
 
   //printa_tudo(Head);
   CSR = create_csr(CSR,k,max_row);
-  make_csr(Head,&CSR);
-
   CSR->rows = max_row;
   CSR->cols = max_col;
+  make_csr(Head,&CSR);
 
   print_CSR(CSR);
 
