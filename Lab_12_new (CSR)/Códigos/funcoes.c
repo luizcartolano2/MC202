@@ -1,5 +1,14 @@
 #include "lab.h"
 
+/**
+ * create node to be insert in the list
+ *
+ * @param int row
+ * @param int col
+ * @param int value
+ *
+ * @return node with the param informations
+ */
 node *create_node(int row, int col, int value){
   node *new_node = calloc(1,sizeof(node));
   if(!new_node)
@@ -14,6 +23,15 @@ node *create_node(int row, int col, int value){
 
 }
 
+/**
+ * insert a new node in the list
+ *
+ * @param int row
+ * @param int col
+ * @param int value
+ *
+ * @return the function doesnt have a return
+ */
 void insert_node(int row, int col, int value){
 
   node * cel = create_node(row,col,value);
@@ -51,6 +69,13 @@ void insert_node(int row, int col, int value){
     }
 }
 
+/**
+ * function to print the list
+ *
+ * @param node *List
+ *
+ * @return the function doesnt have a return
+ */
 void printa_tudo(node *List) {
   while (List) {
     printf("line:%d col:%d val:%d\n",List->row,List->col,List->val);
@@ -58,7 +83,14 @@ void printa_tudo(node *List) {
   }
 }
 
-void destruct_list(node** L){
+/**
+ * destruct the list
+ *
+ * @param node **L
+ *
+ * @return the function doesnt have a return
+ */
+void destruct_list(node **L){
   //here while the head exist whe free the aux apointer
 
   while(*L){
@@ -70,6 +102,15 @@ void destruct_list(node** L){
   (*L) = NULL;
 }
 
+/**
+ * create the CSR matrix with important informations
+ *
+ * @param csr *Csr
+ * @param int size - number of nonzero elements
+ * @param int rows - number of rows in the matrix
+ *
+ * @return node with the param informations
+ */
 csr *create_csr(csr *Csr, int size, int rows){
   int i;
 
