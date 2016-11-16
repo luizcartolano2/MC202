@@ -4,17 +4,20 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+//declaration of node struct
 typedef struct node {
 	int row, col, val;
 	struct node *next;
 }node;
 
+//declaration of the struct that will be used to read the entrys
 typedef struct data{
   int line;
   int collum;
   int value;
 }data;
 
+//declaration of the CSR struct, it's make easy to work with them in the future
 typedef struct CSR{
   int *val;
 	int *col_ind;
@@ -25,7 +28,7 @@ typedef struct CSR{
 	int cols;
 }csr;
 
-//global the declaration of the list head
+//global declaration of the list head
 node * Head;
 
 //functions to mannage the list
@@ -41,4 +44,4 @@ int find_csr(csr *Csr, int row, int col);
 csr *free_CSR(csr *CSR);
 void print_CSR(csr *CSR);
 
-#endif
+#endif /*lab*/
