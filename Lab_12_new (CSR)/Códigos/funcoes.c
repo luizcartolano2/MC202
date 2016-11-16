@@ -1,14 +1,5 @@
 #include "lab.h"
 
-/**
- * create node to be insert in the list
- *
- * @param int row
- * @param int col
- * @param int value
- *
- * @return node with the param informations
- */
 node *create_node(int row, int col, int value){
   node *new_node = calloc(1,sizeof(node));
   if(!new_node)
@@ -23,15 +14,6 @@ node *create_node(int row, int col, int value){
 
 }
 
-/**
- * insert a new node in the list
- *
- * @param int row
- * @param int col
- * @param int value
- *
- * @return the function doesnt have a return
- */
 void insert_node(int row, int col, int value){
 
   node * cel = create_node(row,col,value);
@@ -69,13 +51,6 @@ void insert_node(int row, int col, int value){
     }
 }
 
-/**
- * function to print the list
- *
- * @param node *List
- *
- * @return the function doesnt have a return
- */
 void printa_tudo(node *List) {
   while (List) {
     printf("line:%d col:%d val:%d\n",List->row,List->col,List->val);
@@ -83,13 +58,6 @@ void printa_tudo(node *List) {
   }
 }
 
-/**
- * destruct the list
- *
- * @param node **L
- *
- * @return the function doesnt have a return
- */
 void destruct_list(node **L){
   //here while the head exist whe free the aux apointer
 
@@ -102,15 +70,6 @@ void destruct_list(node **L){
   (*L) = NULL;
 }
 
-/**
- * create the CSR matrix with important informations
- *
- * @param csr *Csr
- * @param int size - number of nonzero elements
- * @param int rows - number of rows in the matrix
- *
- * @return CSR matrix with arrays allocated and initialised
- */
 csr *create_csr(csr *Csr, int size, int rows){
   int i;
 
@@ -129,15 +88,6 @@ csr *create_csr(csr *Csr, int size, int rows){
   return Csr;
 }
 
-/**
- * construct the CSR matrix based on the coordinated list already created
- *
- * @param csr *Csr
- * @param int size - number of nonzero elements
- * @param int rows - number of rows in the matrix
- *
- * @return the function doesnt have a return, but in his end the CSR matrix will be their with arrays allocated and initialised
- */
 void make_csr(node *list, csr **Crs){
   node *aux = Head;
   int i = 0, k;
@@ -159,15 +109,6 @@ void make_csr(node *list, csr **Crs){
 
 }
 
-/**
- * find a value in the CSR matrix
- *
- * @param csr *Csr
- * @param int row - row asked by the user
- * @param int col - col asked by the user
- *
- * @return the value of the (row,col) asked by the user, if it exist or zero if it doesnt
- */
 int find_csr(csr *Csr, int row, int col){
   int i;
 
@@ -183,13 +124,6 @@ int find_csr(csr *Csr, int row, int col){
 
 }
 
-/**
- * free the CSR matrix
- *
- * @param csr *Csr
- *
- * @return the CSR with all the arrays free
- */
 csr *free_CSR(csr *CSR){
   free(CSR->val);
   free(CSR->col_ind);
@@ -199,13 +133,6 @@ csr *free_CSR(csr *CSR){
 
 }
 
-/**
- * print the values inside the CSR arrays
- *
- * @param csr *Csr
- *
- * @return the function doesnt have a return
- */
 void print_CSR(csr *CSR){
   int i;
   for(i = 0; i < CSR->row_ptr_length+1;i++)
