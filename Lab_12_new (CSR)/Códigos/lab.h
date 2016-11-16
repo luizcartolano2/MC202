@@ -1,3 +1,10 @@
+//
+//
+//      created by Luiz Cartolano
+//      ra 183012
+//      program to implement a CSR matrix
+//
+//
 #ifndef lab
 #define lab
 
@@ -32,6 +39,7 @@ typedef struct CSR{
 node * Head;
 
 //functions to mannage the list
+
 /**
  * create node to be insert in the list
  *
@@ -72,7 +80,8 @@ void printa_tudo(node *List);
  */
 void destruct_list(node** L);
 
-//functions to mannage the CSR
+/*functions to mannage the CSR*/
+
 /**
  * create the CSR matrix with important informations
  *
@@ -82,17 +91,18 @@ void destruct_list(node** L);
  *
  * @return CSR matrix with arrays allocated and initialised
  */
-
- /**
-  * construct the CSR matrix based on the coordinated list already created
-  *
-  * @param csr *Csr
-  * @param int size - number of nonzero elements
-  * @param int rows - number of rows in the matrix
-  *
-  * @return the function doesnt have a return, but in his end the CSR matrix will be their with arrays allocated and initialised
-  */
 csr *create_csr(csr *Csr, int size, int rows);
+
+/**
+ * construct the CSR matrix based on the coordinated list already created
+ *
+ * @param csr *Csr
+ * @param int size - number of nonzero elements
+ * @param int rows - number of rows in the matrix
+ *
+ * @return the function doesnt have a return, but in his end the CSR matrix will be their with arrays allocated and initialised
+ */
+void make_csr(node *list, csr **Crs);
 
 /**
  * find a value in the CSR matrix

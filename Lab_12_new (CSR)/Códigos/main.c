@@ -1,3 +1,10 @@
+//
+//
+//      created by Luiz Cartolano
+//      ra 183012
+//      program to implement a CSR matrix
+//
+//
 #include "lab.h"
 
 int main(int argc, char const *argv[]) {
