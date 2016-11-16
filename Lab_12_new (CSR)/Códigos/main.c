@@ -11,28 +11,25 @@ int main(int argc, char const *argv[]) {
   //variables declaration
   int k, i, max_row = 0, max_col = 0,row,col,val;
   Head = NULL;
-  data *entradas;
   csr *CSR;
 
   //reading the number of nonzero elements in the CSR
   scanf("%d",&k);
 
   //dinamic allocation the array that will be use to read the entrys and the CSR
-  entradas = calloc(k,sizeof(data));
   CSR = calloc(1,sizeof(csr));
-  if((!entradas) || (!CSR))
+  if(!CSR)
     printf("Error in the allocation of the entrys struct or in the CSR struct\n");
 
   //loop to ready the entrys, insert nodes in the ordered list and find the number of rows and collums in the matrix
   for(i = 0; i < k; i++){
-    scanf("%d %d %d",&(entradas[i]).line,&(entradas[i]).collum,&(entradas[i]).value);
-    insert_node(entradas[i].line,entradas[i].collum,entradas[i].value);
-    if(max_row < entradas[i].line)
-      max_row = entradas[i].line;
-    if(max_col < entradas[i].collum)
-      max_col = entradas[i].collum;
+    scanf("%d %d %d",&row,&col,&val);
+    insert_node(row,col,val);
+    if(max_row < row)
+      max_row = row;
+    if(max_col < col)
+      max_col = col;
   }
-  free(entradas);
 
   //here we create the CSR representation
   CSR = create_csr(CSR,k,max_row);
@@ -41,6 +38,7 @@ int main(int argc, char const *argv[]) {
   make_csr(Head,&CSR);
 
   //while loop to read the row and col and find it into the CSR matrix
+  row = col = 0;
   while (1) {
     scanf("%d %d",&row,&col);
     if((row == -1) && (col == -1))

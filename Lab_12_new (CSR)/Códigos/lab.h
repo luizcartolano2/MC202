@@ -17,13 +17,6 @@ typedef struct node {
 	struct node *next;
 }node;
 
-//declaration of the struct that will be used to read the entrys
-typedef struct data{
-  int line;
-  int collum;
-  int value;
-}data;
-
 //declaration of the CSR struct, it's make easy to work with them in the future
 typedef struct CSR{
   int *val;
