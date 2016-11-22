@@ -4,16 +4,22 @@
 #include <stdlib.h>
 #include <time.h>
 
+#define  MAX 3
+
 int main(int argc, char const *argv[]) {
 
   int i;
-  printf("intervalo da rand: [0,%d]\n", RAND_MAX);
   srand( (unsigned)time(NULL) );
 
-  //MUDAR O i para obter o número de elementos do vetor q vc quer
-  for(i=1 ; i <= 10 ; i++)
-      printf("Numero %d: %d\n",i, rand());
+  for(i=1 ; i <= MAX ; i++)
+    if(i == 1)
+      printf("[%d,",rand());
 
+    else if(i == MAX)
+      printf("%d]\n",rand());
+
+    else
+      printf("%d,",rand());
   return 0;
 
 }
