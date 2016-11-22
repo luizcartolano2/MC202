@@ -2,47 +2,110 @@
 #include <stdlib.h>
 #include <time.h>
 
-//call the function sort inside the main, declare the vectors as global
-//declarar um vetor vazio de mesmo tamanho
-//parametros de sort (0,num_max_ele)
-void merging(int low, int mid, int high);
-void sort(int low, int high);
+#define MAX 100000000
+#define REP 1
+
+void merge(int arr[], int l, int m, int r);
+void mergeSort(int arr[], int l, int r);
+//mergeSort(arr, 0, arr_size - 1);
 
 int main(int argc, char const *argv[]) {
-  /* code */
+
+  int i;
+  int *vet;
+  clock_t start_time[REP], end_time[REP];
+
+  vet = malloc(MAX * sizeof(int));
+  if(!vet)
+    printf("FAILED\n");
+
+  for(int k = 0; k < REP; k++){
+
+    srand( (unsigned)time(NULL) );
+
+    for(i=0 ; i < MAX ; i++)
+      vet[i] = rand();
+
+    int arr_size = sizeof(vet)/sizeof(vet[0]);
+
+    start_time[k] = clock();
+    mergeSort(vet,0,arr_size-1);
+    end_time[k] = clock();
+
+    printf("Iteration[%d] = %lu seconds\n",k,((end_time[k] - start_time[k]) / CLOCKS_PER_SEC ));
+
+  }
+
+
   return 0;
 
 }
+void merge(int arr[], int l, int m, int r) {
+    int i, j, k;
+    int n1 = m - l + 1;
+    int n2 =  r - m;
 
-void merging(int low, int mid, int high) {
-   int l1, l2, i;
+    /* create temp arrays */
+    int L[n1], R[n2];
 
-   for(l1 = low, l2 = mid + 1, i = low; l1 <= mid && l2 <= high; i++) {
-      if(a[l1] <= a[l2])
-         b[i] = a[l1++];
-      else
-         b[i] = a[l2++];
-   }
+    /* Copy data to temp arrays L[] and R[] */
+    for (i = 0; i < n1; i++)
+        L[i] = arr[l + i];
+    for (j = 0; j < n2; j++)
+        R[j] = arr[m + 1+ j];
 
-   while(l1 <= mid)
-      b[i++] = a[l1++];
+    /* Merge the temp arrays back into arr[l..r]*/
+    i = 0; // Initial index of first subarray
+    j = 0; // Initial index of second subarray
+    k = l; // Initial index of merged subarray
+    while (i < n1 && j < n2)
+    {
+        if (L[i] <= R[j])
+        {
+            arr[k] = L[i];
+            i++;
+        }
+        else
+        {
+            arr[k] = R[j];
+            j++;
+        }
+        k++;
+    }
 
-   while(l2 <= high)
-      b[i++] = a[l2++];
+    /* Copy the remaining elements of L[], if there
+       are any */
+    while (i < n1)
+    {
+        arr[k] = L[i];
+        i++;
+        k++;
+    }
 
-   for(i = low; i <= high; i++)
-      a[i] = b[i];
+    /* Copy the remaining elements of R[], if there
+       are any */
+    while (j < n2)
+    {
+        arr[k] = R[j];
+        j++;
+        k++;
+    }
 }
 
-void sort(int low, int high) {
-   int mid;
+/* l is for left index and r is right index of the
+   sub-array of arr to be sorted */
+void mergeSort(int arr[], int l, int r) {
 
-   if(low < high) {
-      mid = (low + high) / 2;
-      sort(low, mid);
-      sort(mid+1, high);
-      merging(low, mid, high);
-   } else {
-      return;
-   }
+    if (l < r)
+    {
+        // Same as (l+r)/2, but avoids overflow for
+        // large l and h
+        int m = l+(r-l)/2;
+
+        // Sort first and second halves
+        mergeSort(arr, l, m);
+        mergeSort(arr, m+1, r);
+
+        merge(arr, l, m, r);
+    }
 }
