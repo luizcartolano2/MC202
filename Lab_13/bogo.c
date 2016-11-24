@@ -1,11 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 #include <time.h>
 
-#define MAX 258570000
+#define MAX 16
 #define REP 3
 
-int cmpfunc (const void * a, const void * b);
+bool is_sorted(int *a, int n);
+void shuffle(int *a, int n);
+void bogosort(int *a, int n);
 
 int main(int argc, char const *argv[]) {
 
@@ -20,13 +23,13 @@ int main(int argc, char const *argv[]) {
   printf("numero de elementos:%d\n",MAX);
   for(int k = 0; k < REP; k++){
 
-    srand( (unsigned)time(NULL) );
+    srand(42);
 
     for(i=0 ; i < MAX ; i++)
       vet[i] = rand();
 
     start_time[k] = clock();
-    qsort(vet,MAX,sizeof(int),cmpfunc);
+    bogosort(vet,MAX);
     end_time[k] = clock();
 
     printf("Iteration[%d] = %lf seconds\n",k,(((double)end_time[k] - (double)start_time[k]) / (double)CLOCKS_PER_SEC ));
@@ -37,9 +40,24 @@ int main(int argc, char const *argv[]) {
 
 }
 
+bool is_sorted(int *a, int n) {
+  while ( --n >= 1 ) {
+    if ( a[n] < a[n-1] ) return false;
+  }
+  return true;
+}
 
-int cmpfunc (const void * a, const void * b) {
+void shuffle(int *a, int n) {
+  int i, t, r;
+  for(i=0; i < n; i++) {
+    t = a[i];
+    r = rand() % n;
+    a[i] = a[r];
+    a[r] = t;
+  }
+}
 
- return ( *(int*)a - *(int*)b );
-
+void bogosort(int *a, int n) {
+  while (!is_sorted(a,n))
+    shuffle(a, n);
 }

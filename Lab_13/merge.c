@@ -2,12 +2,12 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define MAX 100000000
-#define REP 1
+#define MAX 90000000
+#define REP 3
 
-void merge(int arr[], int l, int m, int r);
-void mergeSort(int arr[], int l, int r);
-//mergeSort(arr, 0, arr_size - 1);
+void Merge(int *A,int *L,int leftCount,int *R,int rightCount);
+void MergeSort(int *A,int n);
+void printArray(int A[], int size);
 
 int main(int argc, char const *argv[]) {
 
@@ -19,6 +19,7 @@ int main(int argc, char const *argv[]) {
   if(!vet)
     printf("FAILED\n");
 
+  printf("numero de elementos:%d\n",MAX);
   for(int k = 0; k < REP; k++){
 
     srand( (unsigned)time(NULL) );
@@ -29,10 +30,10 @@ int main(int argc, char const *argv[]) {
     int arr_size = sizeof(vet)/sizeof(vet[0]);
 
     start_time[k] = clock();
-    mergeSort(vet,0,arr_size-1);
+    MergeSort(vet,MAX);
     end_time[k] = clock();
 
-    printf("Iteration[%d] = %lu seconds\n",k,((end_time[k] - start_time[k]) / CLOCKS_PER_SEC ));
+    printf("Iteration[%d] = %lf seconds\n",k,(((double)end_time[k] - (double)start_time[k]) / (double)CLOCKS_PER_SEC ));
 
   }
 
@@ -40,72 +41,58 @@ int main(int argc, char const *argv[]) {
   return 0;
 
 }
-void merge(int arr[], int l, int m, int r) {
-    int i, j, k;
-    int n1 = m - l + 1;
-    int n2 =  r - m;
+void Merge(int *A,int *L,int leftCount,int *R,int rightCount) {
+	int i,j,k;
 
-    /* create temp arrays */
-    int L[n1], R[n2];
+	// i - to mark the index of left aubarray (L)
+	// j - to mark the index of right sub-raay (R)
+	// k - to mark the index of merged subarray (A)
+	i = 0; j = 0; k =0;
 
-    /* Copy data to temp arrays L[] and R[] */
-    for (i = 0; i < n1; i++)
-        L[i] = arr[l + i];
-    for (j = 0; j < n2; j++)
-        R[j] = arr[m + 1+ j];
+	while(i<leftCount && j< rightCount) {
+		if(L[i]  < R[j])
+      A[k++] = L[i++];
+		else
+      A[k++] = R[j++];
+	}
+	while(i < leftCount)
+    A[k++] = L[i++];
 
-    /* Merge the temp arrays back into arr[l..r]*/
-    i = 0; // Initial index of first subarray
-    j = 0; // Initial index of second subarray
-    k = l; // Initial index of merged subarray
-    while (i < n1 && j < n2)
-    {
-        if (L[i] <= R[j])
-        {
-            arr[k] = L[i];
-            i++;
-        }
-        else
-        {
-            arr[k] = R[j];
-            j++;
-        }
-        k++;
-    }
-
-    /* Copy the remaining elements of L[], if there
-       are any */
-    while (i < n1)
-    {
-        arr[k] = L[i];
-        i++;
-        k++;
-    }
-
-    /* Copy the remaining elements of R[], if there
-       are any */
-    while (j < n2)
-    {
-        arr[k] = R[j];
-        j++;
-        k++;
-    }
+  while(j < rightCount)
+    A[k++] = R[j++];
 }
 
-/* l is for left index and r is right index of the
-   sub-array of arr to be sorted */
-void mergeSort(int arr[], int l, int r) {
+// Recursive function to sort an array of integers.
+void MergeSort(int *A,int n) {
+	int mid,i, *L, *R;
+	if(n < 2)
+    return; // base condition. If the array has less than two element, do nothing.
 
-    if (l < r)
-    {
-        // Same as (l+r)/2, but avoids overflow for
-        // large l and h
-        int m = l+(r-l)/2;
+	mid = n/2;  // find the mid index.
 
-        // Sort first and second halves
-        mergeSort(arr, l, m);
-        mergeSort(arr, m+1, r);
+	// create left and right subarrays
+	// mid elements (from index 0 till mid-1) should be part of left sub-array
+	// and (n-mid) elements (from mid to n-1) will be part of right sub-array
+	L = (int*)malloc(mid*sizeof(int));
+	R = (int*)malloc((n- mid)*sizeof(int));
 
-        merge(arr, l, m, r);
-    }
+	for(i = 0;i<mid;i++)
+    L[i] = A[i]; // creating left subarray
+
+  for(i = mid;i<n;i++)
+    R[i-mid] = A[i]; // creating right subarray
+
+	MergeSort(L,mid);  // sorting the left subarray
+	MergeSort(R,n-mid);  // sorting the right subarray
+	Merge(A,L,mid,R,n-mid);  // Merging L and R into A as sorted list.
+  free(L);
+  free(R);
+}
+
+
+void printArray(int A[], int size) {
+    int i;
+    for (i=0; i < size; i++)
+        printf("%d ", A[i]);
+    printf("\n");
 }

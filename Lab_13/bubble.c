@@ -1,31 +1,19 @@
-/*
-    clock_t start_time, end_time;
-
-    start_time = clock();
-
-    compute();
-    end_time = clock();
-    printf( "Execution time was %lu seconds\n",
-          (end_time - start_time) / CLOCKS_PER_SEC );
-  }
-  */
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 
 void bubble( int v[], int qtd );
-#define  MAX 100000
-#define REP 5
+#define MAX 3200000
+#define REP 3
 int main(int argc, char const *argv[]) {
 
   int i;
   int vet[MAX];
   clock_t start_time[REP], end_time[REP];
-
+  printf("numero de elementos: %d\n",MAX);
   for(int k = 0; k < REP; k++){
 
-    srand( (unsigned)time(NULL) );
+    srand(42);
 
     for(i=0 ; i < MAX ; i++)
       vet[i] = rand();
@@ -34,7 +22,7 @@ int main(int argc, char const *argv[]) {
     bubble(vet,MAX);
     end_time[k] = clock();
 
-    printf("Iteration[%d] = %lu seconds\n",k,((end_time[k] - start_time[k]) / CLOCKS_PER_SEC ));
+    printf("Iteration[%d] = %lf seconds\n",k,(((double)end_time[k] - (double)start_time[k]) / (double)CLOCKS_PER_SEC ));
 
   }
 

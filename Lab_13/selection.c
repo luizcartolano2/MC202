@@ -2,12 +2,40 @@
 #include <stdlib.h>
 #include <time.h>
 
+#define MAX 270000
+#define REP 3
+
 void swap(int *xp, int *yp);
 void selectionSort(int arr[], int n);
 
 int main(int argc, char const *argv[]) {
-    /* code */
-    return 0;
+
+  int i;
+  int *vet;
+  clock_t start_time[REP], end_time[REP];
+
+  vet = malloc(MAX * sizeof(int));
+  if(!vet)
+    printf("FAILED\n");
+
+  printf("numero de elementos:%d\n",MAX);
+  for(int k = 0; k < REP; k++){
+
+    srand( (unsigned)time(NULL) );
+
+    for(i=0 ; i < MAX ; i++)
+      vet[i] = rand();
+
+    start_time[k] = clock();
+    selectionSort(vet,MAX);
+    end_time[k] = clock();
+
+    printf("Iteration[%d] = %lf seconds\n",k,(((double)end_time[k] - (double)start_time[k]) / (double)CLOCKS_PER_SEC ));
+
+  }
+
+  return 0;
+
 }
 
 void swap(int *xp, int *yp){

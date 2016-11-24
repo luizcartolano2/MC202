@@ -2,10 +2,41 @@
 #include <stdlib.h>
 #include <time.h>
 
-void shell_sort(int *a, int size);
+#define MAX 78570000
+#define REP 3
 
+void shell_sort(int *a, int size);
+void printArray(int A[], int size) {
+    int i;
+    for (i=0; i < size; i++)
+        printf("%d ", A[i]);
+    printf("\n");
+}
 int main(int argc, char const *argv[]) {
-  /* code */
+
+  int i;
+  int *vet;
+  clock_t start_time[REP], end_time[REP];
+
+  vet = malloc(MAX * sizeof(int));
+  if(!vet)
+    printf("FAILED\n");
+
+  printf("numero de elementos:%d\n",MAX);
+  for(int k = 0; k < REP; k++){
+
+    srand( (unsigned)time(NULL) );
+
+    for(i=0 ; i < MAX ; i++)
+      vet[i] = rand();
+
+    start_time[k] = clock();
+    shell_sort(vet,MAX);
+    end_time[k] = clock();
+
+    printf("Iteration[%d] = %lf seconds\n",k,(((double)end_time[k] - (double)start_time[k]) / (double)CLOCKS_PER_SEC ));
+  }
+
   return 0;
 }
 
