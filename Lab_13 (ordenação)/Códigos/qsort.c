@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define MAX 258570000
+//#define MAX 258570000
 #define REP 3
 
 int cmpfunc (const void * a, const void * b);
@@ -12,6 +12,9 @@ int main(int argc, char const *argv[]) {
   int i;
   int *vet;
   clock_t start_time[REP], end_time[REP];
+  int MAX;
+
+  scanf("%d",&MAX);
 
   vet = malloc(MAX * sizeof(int));
   if(!vet)

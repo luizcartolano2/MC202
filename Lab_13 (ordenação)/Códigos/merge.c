@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define MAX 90000000
+//#define MAX 1000
 #define REP 3
 
 void Merge(int *A,int *L,int leftCount,int *R,int rightCount);
@@ -14,7 +14,10 @@ int main(int argc, char const *argv[]) {
   int i;
   int *vet;
   clock_t start_time[REP], end_time[REP];
+  int MAX;
 
+  scanf("%d",&MAX);
+  
   vet = malloc(MAX * sizeof(int));
   if(!vet)
     printf("FAILED\n");
@@ -33,7 +36,7 @@ int main(int argc, char const *argv[]) {
     MergeSort(vet,MAX);
     end_time[k] = clock();
 
-    printf("Iteration[%d] = %lf seconds\n",k,(((double)end_time[k] - (double)start_time[k]) / (double)CLOCKS_PER_SEC ));
+    printf("%lf seconds\n",(((double)end_time[k] - (double)start_time[k]) / (double)CLOCKS_PER_SEC ));
 
   }
 

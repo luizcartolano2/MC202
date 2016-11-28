@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define MAX 78570000
+#define MAX 270000
 #define REP 3
 
 void shell_sort(int *a, int size);
@@ -12,6 +12,7 @@ void printArray(int A[], int size) {
         printf("%d ", A[i]);
     printf("\n");
 }
+
 int main(int argc, char const *argv[]) {
 
   int i;
@@ -34,7 +35,7 @@ int main(int argc, char const *argv[]) {
     shell_sort(vet,MAX);
     end_time[k] = clock();
 
-    printf("Iteration[%d] = %lf seconds\n",k,(((double)end_time[k] - (double)start_time[k]) / (double)CLOCKS_PER_SEC ));
+    printf("%lf\n",(((double)end_time[k] - (double)start_time[k]) / (double)CLOCKS_PER_SEC ));
   }
 
   return 0;
