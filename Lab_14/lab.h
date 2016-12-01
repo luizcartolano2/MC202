@@ -27,6 +27,7 @@ node *create_node(int vert);
  *
  * @return the function has no return
  */
- void insertList(int *** graf, int vert_i, int vert_j);
+ node* insertList(node *graf, int vert_i, int vert_j);
+ void Print(node *graf, int size);
 
 #endif
