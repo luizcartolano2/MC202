@@ -3,29 +3,29 @@
 int main(int argc, char const *argv[]) {
   //variables declaration
   int numb_elem;
-  node *graf;
+  node *graph;
   int k;
   int i,j;
 
   //here we gonna read the number of elements and create the pointers vector
   scanf("%d",&numb_elem);
-  graf = malloc((numb_elem+1) * sizeof(node));
-  if(!graf)
+  graph = malloc((numb_elem+1) * sizeof(node));
+  if(!graph)
     printf("Error in the graph allocation\n");
 
   //here we initialize the graph vector with NULL
   for(k = 1; k <= numb_elem; k++){
-    graf[k].vert = k;
-    graf[k].next = NULL;
-    graf[k].color = 0;
+    graph[k].vert = k;
+    graph[k].list = NULL;
+    graph[k].color = 0;
   }
 
   do{
     scanf("%d,%d",&i,&j);
-    insertList(graf,i,j);
+    insertList(graph,i,j);
   }while ((i != 0) && (j != 0));
 
-  Print(graf,numb_elem);
+  Print(graph,numb_elem);
 
   return 0;
 }

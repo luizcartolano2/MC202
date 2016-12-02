@@ -4,33 +4,48 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+int tim3;
+
+typedef struct gpt {
+  struct node * no;
+  struct gpt *next;
+}gpt;
+
 typedef struct node {
   int vert;
   int color;  //0 - white, 1 - grey, 2 - black
-  int d,f;
-  struct node *next;
+  int ti,tf;
+  gpt *list;
 }node;
-//functions that will mannage with the Adjacency List
-/**
- * create node to be insert in the list
- *
- * @param int vert
- *
- * @return node with the param informations
- */
-node *create_node(int vert);
 
 /**
  * insert the node into the Adjacency List
  *
- * @param node *graf
- * @param int vert_i
- * @param int vert_j
+ * @param node *graph
+ * @param int i
+ * @param int j
  *
  * @return the function a pointer to the begining of the list
  */
- node* insertList(node *graf, int vert_i, int vert_j);
-
- void Print(node *graf, int size);
+void insertList(node *graph, int i, int j);
+/**
+ * function DFS
+ *
+ * @param node *graph
+ * @param int size
+ *
+ * @return the function has no return
+ */
+void DFS(node *graph, int size);
+/**
+ * function DFS_Visit
+ *
+ * @param node *graph
+ * @param int i
+ * @param int size
+ *
+ * @return the function has no return
+ */
+void DFS_Visit(node *graph,int i, int size);
 
 #endif
