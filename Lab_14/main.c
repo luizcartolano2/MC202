@@ -17,6 +17,7 @@ int main(int argc, char const *argv[]) {
   for(k = 1; k <= numb_elem; k++){
     graf[k].vert = k;
     graf[k].next = NULL;
+    graf[k].color = 0;
   }
 
   do{

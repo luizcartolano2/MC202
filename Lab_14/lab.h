@@ -6,6 +6,8 @@
 
 typedef struct node {
   int vert;
+  int color;  //0 - white, 1 - grey, 2 - black
+  int d,f;
   struct node *next;
 }node;
 //functions that will mannage with the Adjacency List
@@ -21,13 +23,14 @@ node *create_node(int vert);
 /**
  * insert the node into the Adjacency List
  *
- * @param int ***graf
+ * @param node *graf
  * @param int vert_i
  * @param int vert_j
  *
- * @return the function has no return
+ * @return the function a pointer to the begining of the list
  */
  node* insertList(node *graf, int vert_i, int vert_j);
+
  void Print(node *graf, int size);
 
 #endif
