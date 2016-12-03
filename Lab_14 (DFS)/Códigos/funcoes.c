@@ -1,3 +1,9 @@
+//
+//
+//      created by Luiz Cartolano
+//      RA: 183012
+//
+//
 #include "lab.h"
 
 void insertList(node *graph, int i, int j){

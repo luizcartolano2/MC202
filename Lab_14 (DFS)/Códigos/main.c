@@ -1,3 +1,9 @@
+//
+//
+//      created by Luiz Cartolano
+//      RA: 183012
+//
+//
 #include "lab.h"
 
 int main(int argc, char const *argv[]) {
