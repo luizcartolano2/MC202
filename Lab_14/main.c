@@ -6,11 +6,14 @@ int main(int argc, char const *argv[]) {
   node *graph;
   int k;
   int i,j;
+  ciclica = 0;
+  ped_i = 0;
 
   //here we gonna read the number of elements and create the pointers vector
   scanf("%d",&numb_elem);
   graph = malloc((numb_elem+1) * sizeof(node));
-  if(!graph)
+  ped = calloc(numb_elem,sizeof(int));
+  if((!graph) || (!ped))
     printf("Error in the graph allocation\n");
 
   //here we initialize the graph vector with NULL
@@ -25,7 +28,17 @@ int main(int argc, char const *argv[]) {
     insertList(graph,i,j);
   }while ((i != 0) && (j != 0));
 
-  Print(graph,numb_elem);
+  DFS(graph,numb_elem);
+
+  for (i = 0; i < numb_elem; i++)
+    printf("%d [%d,%d]\n",graph[ped[i]].vert,graph[ped[i]].ti,graph[ped[i]].tf);
+
+  if(ciclica)
+    printf("aciclico: nao\n");
+
+  else
+    printf("aciclico: sim\n");
 
   return 0;
+
 }

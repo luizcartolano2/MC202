@@ -1,6 +1,5 @@
 #include "lab.h"
 
-
 void insertList(node *graph, int i, int j){
   gpt *aux = malloc(sizeof(gpt));
 
@@ -23,6 +22,7 @@ void DFS(node *graph, int size){
 }
 
 void DFS_Visit(node *graph,int i, int size){
+  ped[ped_i++] = i;
   tim3++;
   graph[i].ti = tim3;
   graph[i].color = 1;
@@ -32,6 +32,8 @@ void DFS_Visit(node *graph,int i, int size){
   while (aux) {
     if(!aux->no->color)
       DFS_Visit(graph,aux->no->vert,size);
+    if(aux->no->color == 1)
+      ciclica = 1;
     aux = aux->next;
   }
 

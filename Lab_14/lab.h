@@ -5,6 +5,9 @@
 #include <stdlib.h>
 
 int tim3;
+int ciclica;
+int *ped;
+int ped_i;
 
 typedef struct gpt {
   struct node * no;
